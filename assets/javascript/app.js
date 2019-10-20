@@ -1,5 +1,7 @@
 let game_msg = "";
 let currQuestionIndex = 0;
+let questionTime = 10;
+let intervalID;
 
 let anAnswerChoice = 
 {
@@ -35,20 +37,18 @@ let useTheseAnswers =
     ["5", "6", "7", "8", 0]
 ]
 
+
 $(document).ready(function()
 {
 
+    // Set Timer
+    StartTimer();
+
     InitializeQuestions();
 
-    $("#question").text(myQuestions[currQuestionIndex]["what"]);
+    DisplayQuestion();
 
-    for (let i = 0; i < 4; i++)
-    {
-        let currAnswer = "#answer" + i;
-
-        $(currAnswer).text(myQuestions[currQuestionIndex]["answers"][i].what);
-    }
-
+    
     $("#submitButton").click(function()
     {
         for (let i = 0; i < 4; i++)
@@ -61,9 +61,24 @@ $(document).ready(function()
 
                 CheckAnswer(selected);
             }
-
         }
     })
+
+    // Update the Question
+    document.onkeyup = function(event)
+    {
+
+        console.log(event);
+        if (event.key === 'r')
+        {
+            currQuestionIndex++;
+
+            if (currQuestionIndex < myQuestions.length)
+            {
+                DisplayQuestion();
+            }
+        }
+    }
 
 })
 
@@ -111,7 +126,6 @@ function CheckAnswer(selectedAnswer)
 
     for (let i = 0; i < myQuestions[currQuestionIndex]["answers"].length; i++)
     {
-
         let thisAnswer = myQuestions[currQuestionIndex]["answers"][i];
 
         if (thisAnswer.isCorrect)
@@ -127,5 +141,36 @@ function CheckAnswer(selectedAnswer)
                 break;
             }
         }
+    }
+}
+
+function DisplayQuestion()
+{
+    $("#question").text(myQuestions[currQuestionIndex]["what"]);
+
+    for (let i = 0; i < 4; i++)
+    {
+        let currAnswer = "#answer" + i;
+
+        $(currAnswer).text(myQuestions[currQuestionIndex]["answers"][i].what);
+    }
+}
+
+function StartTimer()
+{
+    intervalID = setInterval(UpdateTime, 1000);
+}
+
+function UpdateTime()
+{
+    if (questionTime > 0)
+    {
+        questionTime--;
+        $("#timeLeft").text(questionTime);   
+    }
+    else
+    {
+        alert("Times Up!");
+        clearInterval(intervalID);
     }
 }
