@@ -25,20 +25,20 @@ let myQuestions =
 
 let useTheseQuestions = 
 [
-    "What is the capital of Florida?",
-    "How many continents are there?",
-    "When was the University of Miami founded?",
-    "Who was the 39th President of the US?",
-    "How many Great Lakes?"
+    "Which of these animals has stripes?",
+    "Which of these birds is not an NFL team?",
+    "Which of these animals is an amphibian?",
+    "Which of these animals has wings?",
+    "Which of these animals is not a household pet?"
 ]
 
 let useTheseAnswers = 
 [
-    ["Miami", "Tallahassee", "Gainesville", "Orlando", 1],
-    ["4", "5", "6", "7", 3],
-    ["1983", "1925", "1955", "1978", 1],
-    ["George W. Bush", "Gerald Ford", "Jimmy Carter", "Bill Clinton", 2],
-    ["5", "6", "7", "8", 0]
+    ["Beaver", "Zebra", "Hippo", "Elephant", 1],
+    ["Eagles", "Falcons", "Cardinals", "Doves", 3],
+    ["Duck", "Frog", "Bear", "Wasp", 1],
+    ["Cat", "Spider", "Dragonfly", "Skunk", 2],
+    ["Roach", "Ferret", "Kitten", "Dog", 0]
 ]
 
 
