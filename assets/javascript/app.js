@@ -189,7 +189,7 @@ function UpdateQuestion()
     else
     {
         gameActive = false;
-        $("#app_msg").text("Game Over!");
+        $("#app_msg").text("Game Over! Press 'Space' to restart.");
     }
 }
 
