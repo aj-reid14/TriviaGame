@@ -1,7 +1,11 @@
 let game_msg = "";
 let currQuestionIndex = 0;
-let questionTime = 10;
+let questionTime = 20;
+let nextQuestionTIme = 3;
 let intervalID;
+let gameActive = false;
+let correct = 0;
+let incorrect = 0;
 
 let anAnswerChoice = 
 {
@@ -40,17 +44,37 @@ let useTheseAnswers =
 
 $(document).ready(function()
 {
+    $("#app_msg").text("Press 'Space' to begin.");
 
-    // Set Timer
-    StartTimer();
+    document.onkeyup = function (event) 
+    {
 
-    InitializeQuestions();
+        console.log(event.key);
+        if (event.code === 'Space' && !gameActive)
+        {
+            // Set Timer
+            StartTimer();
 
-    DisplayQuestion();
+            InitializeQuestions();
 
+            DisplayQuestion();
+        }
+
+
+        if (event.key === 'c') {
+            currQuestionIndex++;
+
+            if (currQuestionIndex < myQuestions.length) 
+            {
+                DisplayQuestion();
+            }
+        }
+    }
     
     $("#submitButton").click(function()
     {
+        StopTimer();
+
         for (let i = 0; i < 4; i++)
         {
             let currAnswer = "#answerButton" + i;
@@ -62,28 +86,17 @@ $(document).ready(function()
                 CheckAnswer(selected);
             }
         }
+
+        setTimeout(UpdateQuestion(), 3000);
+        
     })
-
-    // Update the Question
-    document.onkeyup = function(event)
-    {
-
-        console.log(event);
-        if (event.key === 'r')
-        {
-            currQuestionIndex++;
-
-            if (currQuestionIndex < myQuestions.length)
-            {
-                DisplayQuestion();
-            }
-        }
-    }
 
 })
 
 function InitializeQuestions() 
 {
+
+    gameActive = true;
 
     // If the number of questions and answers don't match
     if (!(useTheseQuestions.length === useTheseAnswers.length)) 
@@ -132,12 +145,12 @@ function CheckAnswer(selectedAnswer)
         {
             if ($(selectedAnswer).text() === thisAnswer.what)
             {
-                alert("Correct!");
+                correct++;
                 break;
             }
             else
             {
-                alert("Incorrect.")
+                incorrect++;
                 break;
             }
         }
@@ -146,6 +159,7 @@ function CheckAnswer(selectedAnswer)
 
 function DisplayQuestion()
 {
+    $("#app_msg").text("");
     $("#question").text(myQuestions[currQuestionIndex]["what"]);
 
     for (let i = 0; i < 4; i++)
@@ -156,12 +170,34 @@ function DisplayQuestion()
     }
 }
 
-function StartTimer()
+function UpdateQuestion()
 {
-    intervalID = setInterval(UpdateTime, 1000);
+
+    $("#correct").text(correct);
+    $("#incorrect").text(incorrect);
+
+    currQuestionIndex++;
+
+    if (currQuestionIndex < myQuestions.length) 
+    {
+        DisplayQuestion();
+        questionTime = 20;
+        StartTimer();
+    }
+    else
+    {
+        gameActive = false;
+        $("#app_msg").text("Game Over!");
+    }
 }
 
-function UpdateTime()
+function StartTimer()
+{
+    questionTime = 20;
+    intervalID = setInterval(UpdateTimer, 1000);
+}
+
+function UpdateTimer()
 {
     if (questionTime > 0)
     {
@@ -170,7 +206,13 @@ function UpdateTime()
     }
     else
     {
-        alert("Times Up!");
-        clearInterval(intervalID);
+        StopTimer();
+        incorrect++;
+        UpdateQuestion();
     }
+}
+
+function StopTimer()
+{
+    clearInterval(intervalID);
 }
