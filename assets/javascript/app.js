@@ -49,6 +49,22 @@ $(document).ready(function()
         $(currAnswer).text(myQuestions[currQuestionIndex]["answers"][i].what);
     }
 
+    $("#submitButton").click(function()
+    {
+        for (let i = 0; i < 4; i++)
+        {
+            let currAnswer = "#answerButton" + i;
+
+            if ($(currAnswer)[0].checked)
+            {
+                let selected = "#" + $(currAnswer)[0].value;
+
+                CheckAnswer(selected);
+            }
+
+        }
+    })
+
 })
 
 function InitializeQuestions() 
@@ -86,4 +102,30 @@ function IsCorrect(arrAnswer, currIndex)
         return true;
     else
         return false;
+}
+
+function CheckAnswer(selectedAnswer)
+{
+
+    let correctAnswer;
+
+    for (let i = 0; i < myQuestions[currQuestionIndex]["answers"].length; i++)
+    {
+
+        let thisAnswer = myQuestions[currQuestionIndex]["answers"][i];
+
+        if (thisAnswer.isCorrect)
+        {
+            if ($(selectedAnswer).text() === thisAnswer.what)
+            {
+                alert("Correct!");
+                break;
+            }
+            else
+            {
+                alert("Incorrect.")
+                break;
+            }
+        }
+    }
 }
