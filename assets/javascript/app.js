@@ -73,21 +73,23 @@ $(document).ready(function()
     
     $("#submitButton").click(function()
     {
-        StopTimer();
 
-        for (let i = 0; i < 4; i++)
+        if (gameActive) 
         {
-            let currAnswer = "#answerButton" + i;
+            StopTimer();
 
-            if ($(currAnswer)[0].checked)
-            {
-                let selected = "#" + $(currAnswer)[0].value;
+            for (let i = 0; i < 4; i++) {
+                let currAnswer = "#answerButton" + i;
 
-                CheckAnswer(selected);
+                if ($(currAnswer)[0].checked) {
+                    let selected = "#" + $(currAnswer)[0].value;
+
+                    CheckAnswer(selected);
+                }
             }
-        }
 
-        setTimeout(UpdateQuestion(), 3000);
+            setTimeout(UpdateQuestion(), 3000);
+        }
         
     })
 
