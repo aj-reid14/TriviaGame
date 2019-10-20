@@ -1,10 +1,15 @@
 body
 {
-    background-color: darkcyan;
+    text-align: center;
+    background-image: url("../images/print.jpg");
 }
 
 #appContent
 {
+    text-align: center;
+    border: 2px solid black;
     margin: auto;
-    padding-top: 10px;
+    width: auto;
+    padding: 5px;
+    background-color: white;
 }
