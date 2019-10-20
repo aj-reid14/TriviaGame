@@ -99,6 +99,8 @@ function InitializeQuestions()
 {
 
     gameActive = true;
+    correct = 0;
+    incorrect = 0;
 
     // If the number of questions and answers don't match
     if (!(useTheseQuestions.length === useTheseAnswers.length)) 
