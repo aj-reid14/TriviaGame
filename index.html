@@ -7,8 +7,12 @@
         
         <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="assets/javascript/app.js"></script>
+        
     </head>
 
     <body>
@@ -18,10 +22,12 @@
     
             <h2 id="appQuestion"><span id="question"></span></h2>
     
-            <h4 id="appAnswer"><span id="answer1"></span></h4>
-            <h4 id="appAnswer"><span id="answer2"></span></h4>
-            <h4 id="appAnswer"><span id="answer3"></span></h4>
-            <h4 id="appAnswer"><span id="answer4"></span></h4>
+            <input id="answerButton" type="radio" name="appAnswer" value="a"><span id="answer0"></span></input>
+            <input id="answerButton" type="radio" name="appAnswer" value="b"><span id="answer1"></span></input>
+            <input id="answerButton" type="radio" name="appAnswer" value="c"><span id="answer2"></span></input>
+            <input id="answerButton" type="radio" name="appAnswer" value="d"><span id="answer3"></span></input>
+            
+            <input id="submitButton" type="submit" value="Submit">
 
             <p><span id="app_msg"></span></p>
     

@@ -1,4 +1,5 @@
 let game_msg = "";
+let currQuestionIndex = 0;
 
 let anAnswerChoice = 
 {
@@ -39,6 +40,15 @@ $(document).ready(function()
 
     InitializeQuestions();
 
+    $("#question").text(myQuestions[currQuestionIndex]["what"]);
+
+    for (let i = 0; i < 4; i++)
+    {
+        let currAnswer = "#answer" + i;
+
+        $(currAnswer).text(myQuestions[currQuestionIndex]["answers"][i].what);
+    }
+
 })
 
 function InitializeQuestions() 
@@ -65,7 +75,6 @@ function InitializeQuestions()
             myQuestions.push({what: useTheseQuestions[i], answers: newAnswerChoice});
             
         }
-
 
         console.log(myQuestions);
     }

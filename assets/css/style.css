@@ -1,0 +1,10 @@
+body
+{
+    background-color: darkcyan;
+}
+
+#appContent
+{
+    margin: auto;
+    padding-top: 10px;
+}
